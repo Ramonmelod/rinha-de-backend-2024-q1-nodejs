@@ -17,14 +17,15 @@ apiRouter.post("/:id/transacoes", (req, res) => {
   /*   const A = "1";
   const B = "2"; */
   console.log("endpoit post");
-  res.send("seu id é: " + id);
+  res.send("Seu id via post é: " + id);
 });
 
-/* apiRouter.get("/clientes/[id]/extrato", (req, res) => {
+apiRouter.get("/:id/extrato", (req, res) => {
   res.type("text/plain");
+  const id = req.params.id;
   console.log("endpoit get");
-  res.send("Pagina get");
-}); */
+  res.send("Seu id via get é: " + id);
+});
 
 app.listen(porta, localhost, () => {
   console.log("servidor rodando!");
