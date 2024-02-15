@@ -1,0 +1,15 @@
+{
+  "name": "rinha-ramon",
+  "description": "Implementação de API em express para a rinha de backend 2024",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
