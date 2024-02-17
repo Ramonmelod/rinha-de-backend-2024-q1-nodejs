@@ -1,17 +1,16 @@
--- Create extensions
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-
--- Create table people
-CREATE TABLE IF NOT EXISTS people (
-    id VARCHAR(36),
-    nickname VARCHAR(32) CONSTRAINT nickname_pk PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    birth_date DATE NOT NULL,
-    stack VARCHAR(1024),
-    search VARCHAR(1160) GENERATED ALWAYS AS (
-        LOWER(name) || ' ' || LOWER(nickname) || ' ' || LOWER(stack)
-    ) STORED
+CREATE TABLE clientes(
+  i_id_clientes SERIAL PRIMARY KEY,
+  s_nome_clientes varchar(100) NOT NULL,
+  s_limite_clientes INT NOT NULL,
+  s_saldo_clientes INT NOT NULL
 );
 
--- Create search index
-CREATE INDEX CONCURRENTLY people_search_idx ON people USING GIST (search gist_trgm_ops);
+CREATE TABLE transacoes(
+  i_id_transacoes  SERIAL PRIMARY KEY,
+  i_valor_transacoes  INT NOT NULL,
+  s_tipo_transacoes  CHAR(1) NOT NULL,
+  s_descricao_transacoes   VARCHAR(100) NOT NULL,
+  s_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+/*NÃO ESQUECER DE GARANTIR QUE CLIENTE 6 NÃO SEJA CRIADO*/

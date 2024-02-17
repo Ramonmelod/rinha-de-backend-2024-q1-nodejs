@@ -9,5 +9,7 @@ Implementação de API em express para a rinha de backend 2024
 - acesso à api via HTTPie fora do containner: http http://localhost:8080/clientes/1/extrato
 
 - docker exec -it <idcontainner> <bash/sh>
+- para editar arquivos dentro do container é possível utilzar o vi
 - docker run -d --name api nome_da_imagem
 - docker inspect <nome_do_contêiner> (para encontrar o ip do container)
+- acesso à api via HTTPie dentro do containner: http http://IPAdressContainer:8080/clientes/1/extrato

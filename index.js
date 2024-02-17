@@ -10,18 +10,20 @@ const localhost = "0.0.0.0";
 
 app.use("/clientes", apiRouter); // router que permite captura de parâmetros da URL para o endPoint /clientes
 
-apiRouter.post("/:id/transacoes", (req, res) => {
+apiRouter.post("/:id/transacoes", async (req, res) => {
   const id = req.params.id;
+  const query = await db.query();
   res.type("text/plain");
   console.log("endpoit post");
-  res.status(200).send("Seu id via post é: " + id);
+  res.status(200).send("Seu id via post é: " + id + query);
 });
 
-apiRouter.get("/:id/extrato", (req, res) => {
-  res.type("text/plain");
+apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
+  const query2 = await db.query();
+  res.type("application/json");
   console.log("endpoit get");
-  res.status(200).send("Seu id via get é: " + id);
+  res.status(200).send("Seu id via get é: " + id + " " + query2);
 });
 
 app.listen(porta, localhost, () => {
