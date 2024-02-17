@@ -1,0 +1,6 @@
+node_modules
+README.md
+compose.yaml
+.editorconfig
+.tool-versions
+dockerfile
