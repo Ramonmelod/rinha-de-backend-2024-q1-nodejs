@@ -6,7 +6,7 @@ const apiRouter = Router();
 const porta = 8080;
 const localhost = "0.0.0.0";
 
-//app.use(express.json());
+app.use(express.json()); // verificar real necessidade de uso
 
 app.use("/clientes", apiRouter); // router que permite captura de parâmetros da URL para o endPoint /clientes
 
@@ -21,9 +21,10 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   const query2 = await db.query();
+  const resultadoConsulta = parseInt(query2);
   res.type("application/json");
   console.log("endpoit get");
-  res.status(200).send("Seu id via get é: " + id + " " + query2);
+  res.status(200).send(query2.rows);
 });
 
 app.listen(porta, localhost, () => {
