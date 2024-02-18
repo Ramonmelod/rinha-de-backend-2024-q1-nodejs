@@ -11,11 +11,14 @@ const query = async () => {
 
   await client.connect();
 
-  const res = await client.query("show server_version;");
-  console.log(res.rows[0].message); // Hello world!
-  await client.end();
+  try {
+    const res = await client.query("SELECT * FROM clientes;");
+    return res;
+  } catch (error) {
+    console.log("Erro no try-catch em: " + error);
+  } finally {
+    await client.end();
+  }
 };
-
-// implementar try-catch
 
 module.exports = { query };
