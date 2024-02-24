@@ -7,8 +7,6 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8080
-  #    expose:
-  #      - "8080"
 
   app02:
     build:
@@ -18,8 +16,7 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8081
-  #    expose:
-  #      - "8081"
+
   database:
     image: "postgres:16.0-alpine3.18"
     environment:
@@ -27,11 +24,11 @@ services: #postar imagem
     network_mode: host
     volumes:
       - ../init.sql:/docker-entrypoint-initdb.d/init.sql
-#  nginx:
-#    image: nginx:1.25.4-alpine
-#    volumes:
-#      - ../nginx.conf:/etc/nginx/nginx.conf
-#    depends_on:
-#      - app01
-#      - app02
-#    network_mode: host
+  nginx:
+    image: nginx:1.25.4-alpine
+    volumes:
+      - ../nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app01
+      - app02
+    network_mode: host
