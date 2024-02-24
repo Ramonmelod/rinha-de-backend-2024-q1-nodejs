@@ -26,6 +26,11 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   console.log("endpoit get");
   res.status(200).send(query2.rows);
 });
+app.get("/", async (req, res) => {
+  res.type("text/plain");
+  console.log("endpoit get");
+  res.status(200).send("Get deu certo");
+});
 
 app.listen(porta, localhost, () => {
   console.log("servidor rodando!");

@@ -1,9 +1,13 @@
-services:
+services: #postar imagem
+  app01:
+    build:
+      context: ..
+      dockerfile: dockerfile
+    network_mode: host
   database:
     image: "postgres:16.0-alpine3.18"
     environment:
       POSTGRES_PASSWORD: "local_password"
-    ports:
-      - "5432:5432"
+    network_mode: host
     volumes:
       - ../init.sql:/docker-entrypoint-initdb.d/init.sql
