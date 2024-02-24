@@ -3,7 +3,7 @@ const { Router } = require("express");
 const db = require("./infra/database");
 const app = express();
 const apiRouter = Router();
-const porta = process.env.HTTP_PORT;
+const porta = process.env.HTTP_PORT || 8080;
 const localhost = "0.0.0.0";
 
 app.use(express.json()); // verificar real necessidade de uso
@@ -27,6 +27,7 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   res.status(200).send(query2.rows);
 });
 app.get("/", async (req, res) => {
+  // endpoint apenas para teste de desenvolvimento
   res.type("text/plain");
   console.log("endpoit get");
   res.status(200).send("Get deu certo");

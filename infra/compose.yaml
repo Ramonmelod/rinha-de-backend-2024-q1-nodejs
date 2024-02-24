@@ -32,3 +32,4 @@ services: #postar imagem
       - app01
       - app02
     network_mode: host
+#implementar limites de memoria e de cpu
