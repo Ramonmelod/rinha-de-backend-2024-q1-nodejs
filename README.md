@@ -2,7 +2,7 @@
 
 Implementação de API em express para a rinha de backend 2024
 
-- tecnologias utilizadas: Express, Postgres
+- tecnologias utilizadas: Express, Postgres, Nginx
   inicialização do container: docker compose -f infra/compose.yaml up -d
 
 - build do container: docker build -t api:latest .
