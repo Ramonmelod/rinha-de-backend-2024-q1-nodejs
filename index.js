@@ -3,7 +3,7 @@ const { Router } = require("express");
 const db = require("./infra/database");
 const app = express();
 const apiRouter = Router();
-const porta = 8080;
+const porta = process.env.HTTP_PORT;
 const localhost = "0.0.0.0";
 
 app.use(express.json()); // verificar real necessidade de uso
