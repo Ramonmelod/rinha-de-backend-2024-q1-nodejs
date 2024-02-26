@@ -16,7 +16,9 @@
 
 - Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
 
-  inicialização do container: docker compose -f infra/compose.yaml up -d
+## instruções para a fase de desenvolvimento
+
+inicialização do container: docker compose -f infra/compose.yaml up -d
 
 - build do container: docker build -t api:latest .
 - acesso à api via HTTPie fora do containner: http http://localhost:8080/clientes/1/extrato
