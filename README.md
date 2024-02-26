@@ -18,6 +18,8 @@
 
 - Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
 
+- [repositório da api](https://github.com/Ramonmelod/rinha-de-backend-2024-q1-nodejs)
+
 ## instruções para a fase de desenvolvimento
 
 inicialização do container: docker compose -f infra/compose.yaml up -d
