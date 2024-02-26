@@ -13,6 +13,7 @@ app.use("/clientes", apiRouter); // router que permite captura de parâmetros da
 apiRouter.post("/:id/transacoes", async (req, res) => {
   const id = req.params.id;
   const { valor } = req.body;
+  const { tipo } = req.body;
   if (true) {
     const query = await db.query({
       // está também é a forma automatizada em que o node-postgres sanitiza a query
@@ -22,7 +23,9 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   }
   res.type("application/json");
   console.log("endpoit post");
-  res.status(200).send("O cliente com: " + id + " teve o saldo atualizado");
+  res
+    .status(200)
+    .send("O cliente com: " + id + tipo + " teve o saldo atualizado");
 });
 /*
 implementar respostas para erros de requisição:

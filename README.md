@@ -24,5 +24,5 @@
 - acesso ao container postgres via psql; psql --host=localhost --username=postgres --port=5432
 - numero de conexões abertas contra o postgres: SELECT count(\*)::int FROM pg_stat_activity where datname = 'postgres';
 
-- para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500}'
+- para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c"}'
 - consultas a partir do nginx usar a porta 9999
