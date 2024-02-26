@@ -47,15 +47,13 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     res.status(422).send("operação não existente para tipo =  " + tipo);
   }
 });
-/*
-else if(valor == "d"){subtração} else{operação invalida}
-implementar respostas para erros de requisição:
-UPDATE clientes SET s_saldo_clientes = s_saldo_clientes + 100 WHERE i_id_clientes = 1;
 
-*/
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
-  const query2 = await db.query("SELECT * FROM clientes;");
+  const query2 = await db.query({
+    text: "SELECT s_limite_clientes, s_saldo_clientes FROM clientes WHERE i_id_clientes = $1",
+    values: [id],
+  });
   const resultadoConsulta = parseInt(query2);
   res.type("application/json");
   console.log("endpoit get");
