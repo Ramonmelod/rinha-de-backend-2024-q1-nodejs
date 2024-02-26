@@ -1,6 +1,6 @@
 # rinha-de-backend-2024-q1-nodejs
 
-## Implementação de API em express para a rinha de backend 2024
+## Implementação de API em JS-node utilizando Express para a rinha de backend 2024
 
 <div>
 <img src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="logo express" width="200" height="auto">
