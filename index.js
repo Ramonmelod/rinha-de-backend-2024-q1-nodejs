@@ -15,11 +15,11 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   const query = await db.query({
     // está também é a forma automatizada em que o node-postgres sanitiza a query
     text: "UPDATE clientes SET s_saldo_clientes = 1000 WHERE i_id_clientes = $1",
-    values: [1], // PUXAR VALOR DO [ID]
+    values: [id], // PUXAR VALOR DO [ID]
   });
   res.type("application/json");
   console.log("endpoit post");
-  res.status(200).send("Seu id via post é: " + id + " seu post foi feito");
+  res.status(200).send("O cliente com: " + id + " teve o saldo atualizado");
 });
 
 apiRouter.get("/:id/extrato", async (req, res) => {
