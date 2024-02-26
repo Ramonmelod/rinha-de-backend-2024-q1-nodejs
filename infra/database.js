@@ -1,6 +1,7 @@
 const { Client } = require("pg");
 
 const query = async (queryObject) => {
+  // alterar para um pool de conexões
   const client = new Client({
     host: "localhost",
     port: "5432",
