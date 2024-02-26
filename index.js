@@ -24,8 +24,8 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
       values: [valor, id],
     });
     const query2 = await db.query({
-      text: "INSERT INTO transacoes(i_valor_transacoes, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3)",
-      values: [valor, tipo, descricao],
+      text: "INSERT INTO transacoes(i_valor_transacoes, i_id_cliente, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3,$4)",
+      values: [valor, id, tipo, descricao],
     });
     res
       .status(200)
@@ -37,8 +37,8 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
       values: [valor, id],
     });
     const query2 = await db.query({
-      text: "INSERT INTO transacoes(i_valor_transacoes, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3)",
-      values: [valor, tipo, descricao],
+      text: "INSERT INTO transacoes(i_valor_transacoes,i_id_cliente, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3,$4)",
+      values: [valor, id, tipo, descricao],
     });
     res
       .status(200)

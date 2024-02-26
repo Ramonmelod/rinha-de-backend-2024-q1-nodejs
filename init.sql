@@ -7,10 +7,13 @@ CREATE TABLE clientes(
 
 CREATE TABLE transacoes(
   i_id_transacoes  SERIAL PRIMARY KEY,
+  i_id_cliente INT NOT NULL,
   i_valor_transacoes  INT NOT NULL,
   s_tipo_transacoes  CHAR(1) NOT NULL,
   s_descricao_transacoes   VARCHAR(100) NOT NULL,
-  i_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  i_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_clientes_id_transacoes
+      FOREIGN KEY (i_id_cliente) REFERENCES clientes(i_id_clientes)
 );
 
 INSERT INTO clientes (s_nome_clientes, s_limite_clientes)
