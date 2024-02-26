@@ -2,6 +2,9 @@
 
 ## Implementação de API em express para a rinha de backend 2024
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg" alt="logo nginx" width="300" height="auto">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="logo postgres" width="200" height="auto">
+
 - tecnologias utilizadas: `Express`, `Postgres`, `Nginx`
 
   inicialização do container: docker compose -f infra/compose.yaml up -d
@@ -24,5 +27,9 @@
 - acesso ao container postgres via psql; psql --host=localhost --username=postgres --port=5432
 - numero de conexões abertas contra o postgres: SELECT count(\*)::int FROM pg_stat_activity where datname = 'postgres';
 
-- para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c"}'
+- para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c","descricao": "Pix do nubank"}'
 - consultas a partir do nginx usar a porta 9999
+
+## Autor
+
+- Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
