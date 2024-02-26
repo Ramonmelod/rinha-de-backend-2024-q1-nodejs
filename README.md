@@ -3,9 +3,18 @@
 ## Implementação de API em express para a rinha de backend 2024
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg" alt="logo nginx" width="300" height="auto">
+<img src="https://en.wikipedia.org/wiki/Express.js#/media/File:Expressjs.png" alt="logo postgres" width="200" height="auto">
 <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="logo postgres" width="200" height="auto">
 
-- tecnologias utilizadas: `Express`, `Postgres`, `Nginx`
+## tecnologias utilizadas:
+
+- `Express`
+- `Postgres`
+- `Nginx`
+
+## Autor
+
+- Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
 
   inicialização do container: docker compose -f infra/compose.yaml up -d
 
@@ -16,7 +25,7 @@
 - para editar arquivos dentro do container é possível utilzar o vi
 - docker run -d --name api nome_da_imagem
 - docker inspect <nome_do_contêiner> (para encontrar o ip do container)
-- acesso à api via HTTPie dentro do containner: http http://IPAdressContainer:8080/clientes/1/extrato
+- acesso à api via HTTPie dentro do containner: http http://IPAdressContainer:8080/clientes/[id]/extrato (o id deve ser um valor de 1 a 5)
 
 ## instruções de teste:
 
@@ -29,7 +38,3 @@
 
 - para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c","descricao": "Pix do nubank"}'
 - consultas a partir do nginx usar a porta 9999
-
-## Autor
-
-- Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
