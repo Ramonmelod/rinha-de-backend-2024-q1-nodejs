@@ -9,25 +9,37 @@ const localhost = "0.0.0.0";
 app.use(express.json()); // verificar real necessidade de uso
 
 app.use("/clientes", apiRouter); // router que permite captura de parâmetros da URL para o endPoint /clientes
-
+//--------------------------------post ------------------------------------------------------------
 apiRouter.post("/:id/transacoes", async (req, res) => {
+  console.log("endpoit post");
+  res.type("application/json");
   const id = req.params.id;
   const { valor } = req.body;
   const { tipo } = req.body;
-  if (true) {
+  if (tipo === "c") {
+    // crédito de valor em conta
     const query = await db.query({
-      // está também é a forma automatizada em que o node-postgres sanitiza a query
       text: "UPDATE clientes SET s_saldo_clientes = s_saldo_clientes + $1 WHERE i_id_clientes = $2",
       values: [valor, id],
     });
+    res
+      .status(200)
+      .send("O cliente com: " + id + " teve o saldo adicionado em: " + valor);
+  } else if (tipo === "d") {
+    // debito de valor em conta
+    const query = await db.query({
+      text: "UPDATE clientes SET s_saldo_clientes = s_saldo_clientes - $1 WHERE i_id_clientes = $2",
+      values: [valor, id],
+    });
+    res
+      .status(200)
+      .send("O cliente com: " + id + " teve o saldo subtraído em: " + valor);
+  } else {
+    res.status(422).send("operação não existente para tipo =  " + tipo);
   }
-  res.type("application/json");
-  console.log("endpoit post");
-  res
-    .status(200)
-    .send("O cliente com: " + id + tipo + " teve o saldo atualizado");
 });
 /*
+else if(valor == "d"){subtração} else{operação invalida}
 implementar respostas para erros de requisição:
 UPDATE clientes SET s_saldo_clientes = s_saldo_clientes + 100 WHERE i_id_clientes = 1;
 
