@@ -12,15 +12,19 @@ app.use("/clientes", apiRouter); // router que permite captura de parâmetros da
 
 apiRouter.post("/:id/transacoes", async (req, res) => {
   const id = req.params.id;
-  const query = await db.query();
-  res.type("text/plain");
+  const query = await db.query({
+    // está também é a forma automatizada em que o node-postgres sanitiza a query
+    text: "UPDATE clientes SET s_saldo_clientes = 1000 WHERE i_id_clientes = $1",
+    values: [1], // PUXAR VALOR DO [ID]
+  });
+  res.type("application/json");
   console.log("endpoit post");
-  res.status(200).send("Seu id via post é: " + id + query);
+  res.status(200).send("Seu id via post é: " + id + " seu post foi feito");
 });
 
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
-  const query2 = await db.query();
+  const query2 = await db.query("SELECT * FROM clientes;");
   const resultadoConsulta = parseInt(query2);
   res.type("application/json");
   console.log("endpoit get");

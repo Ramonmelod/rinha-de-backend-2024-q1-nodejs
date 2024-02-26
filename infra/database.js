@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-const query = async () => {
+const query = async (queryObject) => {
   const client = new Client({
     host: "localhost",
     port: "5432",
@@ -12,7 +12,7 @@ const query = async () => {
   await client.connect();
 
   try {
-    const res = await client.query("SELECT * FROM clientes;");
+    const res = await client.query(queryObject);
     return res;
   } catch (error) {
     console.log("Erro no try-catch em: " + error);
