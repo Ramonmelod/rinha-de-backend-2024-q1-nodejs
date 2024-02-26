@@ -16,20 +16,29 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   const id = req.params.id;
   const { valor } = req.body;
   const { tipo } = req.body;
+  const { descricao } = req.body;
   if (tipo === "c") {
     // crédito de valor em conta
-    const query = await db.query({
+    const query1 = await db.query({
       text: "UPDATE clientes SET s_saldo_clientes = s_saldo_clientes + $1 WHERE i_id_clientes = $2",
       values: [valor, id],
+    });
+    const query2 = await db.query({
+      text: "INSERT INTO transacoes(i_valor_transacoes, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3)",
+      values: [valor, tipo, descricao],
     });
     res
       .status(200)
       .send("O cliente com: " + id + " teve o saldo adicionado em: " + valor);
   } else if (tipo === "d") {
-    // debito de valor em conta
-    const query = await db.query({
+    // débito de valor em conta
+    const query1 = await db.query({
       text: "UPDATE clientes SET s_saldo_clientes = s_saldo_clientes - $1 WHERE i_id_clientes = $2",
       values: [valor, id],
+    });
+    const query2 = await db.query({
+      text: "INSERT INTO transacoes(i_valor_transacoes, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3)",
+      values: [valor, tipo, descricao],
     });
     res
       .status(200)

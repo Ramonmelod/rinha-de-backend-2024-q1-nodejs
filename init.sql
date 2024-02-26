@@ -10,7 +10,7 @@ CREATE TABLE transacoes(
   i_valor_transacoes  INT NOT NULL,
   s_tipo_transacoes  CHAR(1) NOT NULL,
   s_descricao_transacoes   VARCHAR(100) NOT NULL,
-  s_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  i_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO clientes (s_nome_clientes, s_limite_clientes)
