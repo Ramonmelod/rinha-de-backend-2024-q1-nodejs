@@ -20,6 +20,26 @@
 
 - [repositório da api](https://github.com/Ramonmelod/rinha-de-backend-2024-q1-nodejs)
 
+## Instruções inicialização:
+
+- Com o terminal na pasta do repositório inicie os conteiners com o comando: docker compose -f infra/compose.yaml up -d
+- Caso queira consultar os endpoints você pode usar seu navegador, o curl, wget ou HTTPie para consultar os endpoints:/, /clientes/[id]/extrato e /clientes/[id]/transacoes, onde id é um número de 1 a 5 que representa os clientes já inseridos na tabelas de clientes. Abaixo segue exemplos de consultas a estes endpoint utilizando o navegador de linha de comando HTTPie, que você pode instalar (caso esteja no ubuntu) utilizando sudo apt install httpie:
+- http http://localhost:8080/clientes/1/extrato
+- http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c","descricao": "Pix do nubank"}'
+
+- Para destruir os containers feitos a partir do compose.yaml utilizar o comando: docker compose -f infra/compose.yaml down
+- para listar as imagens baixadas e construidas no seu computador rodar sudo apt images e após obter os ids da images que deseja apagar rodar o comando sudo rmi <idImagem1> <idImagem2> <idImagem3> <idImage4>
+
+- Caso queira acessar o banco de dados postgres via psql, rodar comando: psql --host=localhost --username=postgres --port=5432
+
+## Portas do containers
+
+- Os containers estão no modo host, escutando cada um em uma porta diferente, abaixo seguem suas portas e funcionalidades:
+- Nginx => porta: 9999. É utilizado como proxy reverso e balanceador de carga, sendo que no funcionamento normal da aplicação, todas as requisições devem sem encaminhadas para ele, de forma que este escolha se a requisição deve ir para o app01 ou app02
+- app01 => porta: 8080. Esta é uma das instancias da aplicação.
+- app02 => porta: 8081. Esta é uma das instancias da aplicação.
+- postgres => porta: 5432. Este é o banco de dados da aplicação
+
 ## instruções para a fase de desenvolvimento
 
 inicialização do container: docker compose -f infra/compose.yaml up -d
@@ -32,15 +52,4 @@ inicialização do container: docker compose -f infra/compose.yaml up -d
 - docker run -d --name api nome_da_imagem
 - docker inspect <nome_do_contêiner> (para encontrar o ip do container)
 - acesso à api via HTTPie dentro do containner: http http://IPAdressContainer:8080/clientes/[id]/extrato (o id deve ser um valor de 1 a 5)
-
-## instruções de teste:
-
-- rodar conteiner com comando: docker compose -f infra/compose.yaml up -d
-- acesso à api via HTTPie dentro do containner no modo host: http http://localhost:8080 (este endpoint não acessa o banco de dados)
-- destruir o container feito a partir do compose.yaml: docker compose -f infra/compose.yaml down
-- rodar api com comando: node index.js (apenas para testar api fora do container)
-- acesso ao container postgres via psql; psql --host=localhost --username=postgres --port=5432
 - numero de conexões abertas contra o postgres: SELECT count(\*)::int FROM pg_stat_activity where datname = 'postgres';
-
-- para fazer uma requisição de post no endpoint /clientes/1/transacoes usando HTTPie: http POST http://localhost:8080/clientes/1/transacoes Content-Type:application/json <<< '{"valor": 500,"tipo" : "c","descricao": "Pix do nubank"}'
-- consultas a partir do nginx usar a porta 9999
