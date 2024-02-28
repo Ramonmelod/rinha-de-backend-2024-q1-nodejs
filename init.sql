@@ -6,7 +6,7 @@ CREATE TABLE clientes(
 );
 
 CREATE TABLE transacoes(
-  i_id_transacoes  SERIAL PRIMARY KEY,
+  id  SERIAL PRIMARY KEY,
   cliente_id INT NOT NULL,
   i_valor_transacoes  INT NOT NULL,
   s_tipo_transacoes  CHAR(1) NOT NULL,
