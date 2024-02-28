@@ -8,7 +8,7 @@ CREATE TABLE clientes(
 CREATE TABLE transacoes(
   id  SERIAL PRIMARY KEY,
   cliente_id INT NOT NULL,
-  i_valor_transacoes  INT NOT NULL,
+  valor INT NOT NULL,
   s_tipo_transacoes  CHAR(1) NOT NULL,
   s_descricao_transacoes   VARCHAR(100) NOT NULL,
   i_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
