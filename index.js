@@ -53,12 +53,12 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   console.log("endpoit get");
   res.status(200).send(query2.rows);
 });
-app.get("/", async (req, res) => {
+/*app.get("/", async (req, res) => {
   // endpoint apenas para teste de desenvolvimento
   res.type("text/plain");
   console.log("endpoit get");
   res.status(200).send("Get deu certo");
-});
+});// apenas para teste da api sem conexão com o bando de dados*/
 
 app.listen(porta, localhost, () => {
   console.log("servidor rodando!");
