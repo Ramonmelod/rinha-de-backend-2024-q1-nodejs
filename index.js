@@ -38,7 +38,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 
   const query3 = await db.query({
     // consulta limite e saldo de acordo com o id vindo na url
-    text: "SELECT s_limite_clientes, s_saldo_clientes FROM clientes WHERE id = $1",
+    text: "SELECT limite, s_saldo_clientes FROM clientes WHERE id = $1",
     values: [id],
   });
   const resultadoConsulta = parseInt(query3); // verificar necessidade do parse
@@ -48,7 +48,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   const query2 = await db.query({
-    text: "SELECT c.s_limite_clientes, c.s_saldo_clientes, t.i_realizada_transacoes FROM clientes c JOIN transacoes t ON c.id = t.i_id_cliente WHERE c.id = $1;",
+    text: "SELECT c.limite, c.s_saldo_clientes, t.i_realizada_transacoes FROM clientes c JOIN transacoes t ON c.id = t.i_id_cliente WHERE c.id = $1;",
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);

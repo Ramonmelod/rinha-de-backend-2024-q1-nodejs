@@ -1,7 +1,7 @@
 CREATE TABLE clientes(
   id SERIAL PRIMARY KEY,
   nome varchar(100) NOT NULL,
-  s_limite_clientes INT NOT NULL,
+  limite INT NOT NULL,
   s_saldo_clientes INT NOT NULL DEFAULT 0
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE transacoes(
       FOREIGN KEY (i_id_cliente) REFERENCES clientes(id)
 );
 
-INSERT INTO clientes (nome, s_limite_clientes)
+INSERT INTO clientes (nome, limite)
 VALUES
   ('o barato sai caro', 1000 * 100),
   ('zan corp ltda', 800 * 100),
