@@ -12,7 +12,7 @@ CREATE TABLE transacoes(
   tipo  CHAR(1) NOT NULL,
   descricao   VARCHAR(100) NOT NULL,
   realizada_em  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_clientes_id_transacoes
+  CONSTRAINT fk_clientes_transacoes_id
       FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
