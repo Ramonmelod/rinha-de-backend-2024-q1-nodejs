@@ -32,7 +32,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [valor, id],
   });
   const query2 = await db.query({
-    text: "INSERT INTO transacoes(valor, cliente_id, tipo, s_descricao_transacoes) values($1,$2,$3,$4)",
+    text: "INSERT INTO transacoes(valor, cliente_id, tipo, descricao) values($1,$2,$3,$4)",
     values: [valor, id, tipo, descricao],
   });
 
