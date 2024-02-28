@@ -1,5 +1,5 @@
 CREATE TABLE clientes(
-  i_id_clientes SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   s_nome_clientes varchar(100) NOT NULL,
   s_limite_clientes INT NOT NULL,
   s_saldo_clientes INT NOT NULL DEFAULT 0
@@ -13,7 +13,7 @@ CREATE TABLE transacoes(
   s_descricao_transacoes   VARCHAR(100) NOT NULL,
   i_realizada_transacoes  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_clientes_id_transacoes
-      FOREIGN KEY (i_id_cliente) REFERENCES clientes(i_id_clientes)
+      FOREIGN KEY (i_id_cliente) REFERENCES clientes(id)
 );
 
 INSERT INTO clientes (s_nome_clientes, s_limite_clientes)
