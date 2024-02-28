@@ -32,7 +32,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [valor, id],
   });
   const query2 = await db.query({
-    text: "INSERT INTO transacoes(i_valor_transacoes, i_id_cliente, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3,$4)",
+    text: "INSERT INTO transacoes(i_valor_transacoes, cliente_id, s_tipo_transacoes, s_descricao_transacoes) values($1,$2,$3,$4)",
     values: [valor, id, tipo, descricao],
   });
 
@@ -48,7 +48,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   const query2 = await db.query({
-    text: "SELECT c.limite, c.saldo, t.i_realizada_transacoes FROM clientes c JOIN transacoes t ON c.id = t.i_id_cliente WHERE c.id = $1;",
+    text: "SELECT c.limite, c.saldo, t.i_realizada_transacoes FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1;",
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);
