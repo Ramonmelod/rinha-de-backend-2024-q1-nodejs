@@ -48,7 +48,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   const query2 = await db.query({
-    text: "SELECT s_limite_clientes, s_saldo_clientes FROM clientes WHERE i_id_clientes = $1",
+    text: "SELECT c.s_limite_clientes, c.s_saldo_clientes, t.i_realizada_transacoes FROM clientes c JOIN transacoes t ON c.i_id_clientes = t.i_id_cliente WHERE c.i_id_clientes = $1;",
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);
