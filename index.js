@@ -24,6 +24,15 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   } else if (tipo === "d") {
     // débito de valor em conta
     valor = -valor;
+    const query0 = await db.query({
+      text: "SELECT limite, saldo FROM clientes WHERE id = $1",
+      values: [id],
+    });
+    if (query0.rows[0].saldo + valor < -query0.rows[0].limite) {
+      // verificar outra forma de fazer
+      res.status(422).send("Limite insuficiente!");
+      return;
+    }
   } else {
     res.status(422).send("operação não existente para tipo =  " + tipo);
   }
