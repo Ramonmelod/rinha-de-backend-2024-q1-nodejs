@@ -48,7 +48,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   const query2 = await db.query({
-    text: "SELECT c.limite, c.saldo, t.realizada_em FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1;",
+    text: "SELECT c.limite, c.saldo, t.realizada_em FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1 ORDER BY t.realizada_em DESC limit 10",
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);
@@ -59,7 +59,7 @@ apiRouter.get("/:id/extrato", async (req, res) => {
       data_extrato: updatedAt,
       limite: query2.rows[0].limite,
     },
-    ultimas_transacoes: [],
+    ultimas_transacoes: [query2.rows[0]],
   };
   res.type("application/json");
   console.log("endpoit get");
