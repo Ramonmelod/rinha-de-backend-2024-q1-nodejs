@@ -39,6 +39,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     }
   } else {
     res.status(422).send("operação não existente para tipo =  " + tipo);
+    return;
   }
   const query1 = await db.query({
     text: "UPDATE clientes SET saldo = saldo + $1 WHERE id = $2",
@@ -55,7 +56,8 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [id],
   });
   const resultadoConsulta = parseInt(query3); // verificar necessidade do parse
-  res.status(200).send(query3.rows);
+  res.status(200).send(query3.rows[0]);
+  return;
 });
 
 //--------------------------------get ------------------------------------------------------------
@@ -92,14 +94,8 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   res.type("application/json");
   console.log("endpoit get");
   res.status(200).send(objectResponse);
+  return;
 });
-/*app.get("/", async (req, res) => {
-  // endpoint apenas para teste de desenvolvimento
-  res.type("text/plain");
-  console.log("endpoit get");
-  res.status(200).send("Get deu certo");
-});// apenas para teste da api sem conexão com o bando de dados*/
-
 app.listen(porta, localhost, () => {
   console.log("servidor rodando!");
 });
