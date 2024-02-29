@@ -45,10 +45,15 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   res.status(200).send(query3.rows);
 });
 
+//--------------------------------get ------------------------------------------------------------
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
+  const query1 = await db.query({
+    text: "SELECT limite, saldo FROM clientes WHERE id = $1",
+    values: [id],
+  });
   const query2 = await db.query({
-    text: "SELECT c.limite, c.saldo, t.realizada_em, t.descricao, t.tipo, t.valor FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1 ORDER BY t.realizada_em DESC limit 10",
+    text: "SELECT valor, tipo, descricao, realizada_em FROM transacoes WHERE cliente_id = $1 ORDER BY realizada_em DESC limit 10",
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);
@@ -56,15 +61,16 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   const ultimas_transacoes = [];
 
   query2.rows.forEach((element) => {
+    // recebe os elementos da query2.rows e armazena na array ultimas_transacoes para ser usada como elemento da propriedade ultimas_transacoes
     ultimas_transacoes.push(element);
   });
   const objectResponse = {
     saldo: {
-      total: query2.rows[0].saldo,
+      total: query1.rows[0].saldo,
       data_extrato: updatedAt,
-      limite: query2.rows[0].limite,
+      limite: query1.rows[0].limite,
     },
-    ultimas_transacoes: [ultimas_transacoes],
+    ultimas_transacoes: [ultimas_transacoes], //recebe a array ultimas_transacoes
   };
   res.type("application/json");
   console.log("endpoit get");
@@ -84,3 +90,4 @@ app.listen(porta, localhost, () => {
 /*notas:
 os serviços não devem demorar mais que 40 segundos para subir estar disponiveis
 */
+/* "SELECT c.limite, c.saldo, t.realizada_em, t.descricao, t.tipo, t.valor FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1 ORDER BY t.realizada_em DESC limit 10"*/
