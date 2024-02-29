@@ -70,7 +70,7 @@ apiRouter.get("/:id/extrato", async (req, res) => {
       data_extrato: updatedAt,
       limite: query1.rows[0].limite,
     },
-    ultimas_transacoes: [ultimas_transacoes], //recebe a array ultimas_transacoes
+    ultimas_transacoes: ultimas_transacoes, //recebe a array ultimas_transacoes
   };
   res.type("application/json");
   console.log("endpoit get");
