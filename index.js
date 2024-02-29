@@ -59,6 +59,7 @@ apiRouter.get("/:id/extrato", async (req, res) => {
       data_extrato: updatedAt,
       limite: query2.rows[0].limite,
     },
+    ultimas_transacoes: [],
   };
   res.type("application/json");
   console.log("endpoit get");
