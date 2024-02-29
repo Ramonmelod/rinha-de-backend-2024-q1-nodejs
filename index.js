@@ -59,7 +59,18 @@ apiRouter.get("/:id/extrato", async (req, res) => {
       data_extrato: updatedAt,
       limite: query2.rows[0].limite,
     },
-    ultimas_transacoes: [query2.rows[0]],
+    ultimas_transacoes: [
+      query2.rows[0],
+      query2.rows[1],
+      query2.rows[2],
+      query2.rows[3],
+      query2.rows[4],
+      query2.rows[5],
+      query2.rows[6],
+      query2.rows[7],
+      query2.rows[8],
+      query2.rows[9],
+    ],
   };
   res.type("application/json");
   console.log("endpoit get");
