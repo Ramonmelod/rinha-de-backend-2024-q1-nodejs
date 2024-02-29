@@ -17,6 +17,10 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   let { valor } = req.body;
   const { tipo } = req.body;
   const { descricao } = req.body;
+  if (id >= 6) {
+    res.status(404).send("Cliente inexistente!");
+    return;
+  }
   if (tipo === "c") {
     // implementar controle de limite de saldo
     // crédito de valor em conta
@@ -57,6 +61,10 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
 //--------------------------------get ------------------------------------------------------------
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
+  if (id >= 6) {
+    res.status(404).send("Cliente inexistente!");
+    return;
+  }
   const query1 = await db.query({
     text: "SELECT limite, saldo FROM clientes WHERE id = $1",
     values: [id],
