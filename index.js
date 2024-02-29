@@ -52,9 +52,17 @@ apiRouter.get("/:id/extrato", async (req, res) => {
     values: [id],
   });
   //const resultadoConsulta = parseInt(query2);
+  const updatedAt = new Date().toISOString();
+  const objectResponse = {
+    saldo: {
+      total: query2.rows[0].saldo,
+      data_extrato: updatedAt,
+      limite: query2.rows[0].limite,
+    },
+  };
   res.type("application/json");
   console.log("endpoit get");
-  res.status(200).send(query2.rows);
+  res.status(200).send(objectResponse);
 });
 /*app.get("/", async (req, res) => {
   // endpoint apenas para teste de desenvolvimento
