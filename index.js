@@ -53,24 +53,18 @@ apiRouter.get("/:id/extrato", async (req, res) => {
   });
   //const resultadoConsulta = parseInt(query2);
   const updatedAt = new Date().toISOString();
+  const ultimas_transacoes = [];
+
+  query2.rows.forEach((element) => {
+    ultimas_transacoes.push(element);
+  });
   const objectResponse = {
     saldo: {
       total: query2.rows[0].saldo,
       data_extrato: updatedAt,
       limite: query2.rows[0].limite,
     },
-    ultimas_transacoes: [
-      query2.rows[0],
-      query2.rows[1],
-      query2.rows[2],
-      query2.rows[3],
-      query2.rows[4],
-      query2.rows[5],
-      query2.rows[6],
-      query2.rows[7],
-      query2.rows[8],
-      query2.rows[9],
-    ],
+    ultimas_transacoes: [ultimas_transacoes],
   };
   res.type("application/json");
   console.log("endpoit get");
