@@ -50,6 +50,6 @@ services: #postar imagem
       resources:
         limits:
           cpus: "0.2"
-          memory: "60MB" # 30MB
+          memory: "30MB" # 60MB
 
 #implementar limites de memoria: 550 mb e de cpu: 1.5 cpus
