@@ -52,4 +52,4 @@ services: #postar imagem
           cpus: "0.2"
           memory: "30MB" # 60MB
 
-#implementar limites de memoria: 550 mb e de cpu: 1.5 cpus
+#limites de memoria: 550 mb e de cpu: 1.5 cpus
