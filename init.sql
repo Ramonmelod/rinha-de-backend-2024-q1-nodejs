@@ -3,6 +3,7 @@ CREATE TABLE clientes(
   nome varchar(100) NOT NULL,
   limite INT NOT NULL,
   saldo INT NOT NULL DEFAULT 0
+  CONSTRAINT saldo_maior_ou_igual_limite CHECK (saldo >= -limite) /*verificar se este constraint diminui performance*/
 );
 
 CREATE TABLE transacoes(
