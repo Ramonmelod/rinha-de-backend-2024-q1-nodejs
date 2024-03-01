@@ -6,7 +6,7 @@ const apiRouter = Router();
 const porta = process.env.HTTP_PORT || 8080;
 const localhost = "0.0.0.0";
 
-app.use(express.json()); // verificar real necessidade de uso
+app.use(express.json());
 
 app.use("/clientes", apiRouter); // router que permite captura de parâmetros da URL para o endPoint /clientes
 //--------------------------------post ------------------------------------------------------------
@@ -88,7 +88,6 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     text: "SELECT limite, saldo FROM clientes WHERE id = $1",
     values: [id],
   });
-  const resultadoConsulta = parseInt(query3); // verificar necessidade do parse
   console.log("post comum");
   res.status(200).send(query3.rows[0]);
   return;
@@ -109,7 +108,6 @@ apiRouter.get("/:id/extrato", async (req, res) => {
     text: "SELECT valor, tipo, descricao, realizada_em FROM transacoes WHERE cliente_id = $1 ORDER BY realizada_em DESC limit 10",
     values: [id],
   });
-  //const resultadoConsulta = parseInt(query2);
   const updatedAt = new Date().toISOString();
   const ultimas_transacoes = [];
 
