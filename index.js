@@ -17,16 +17,47 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   let { valor } = req.body;
   const { tipo } = req.body;
   const { descricao } = req.body;
+
+  if (
+    !/^\d+$/.test(valor) ||
+    !Number.isInteger(Number(valor)) ||
+    Number(valor) < 0
+  ) {
+    console.log("valor negativo ou fracionário" + valor);
+    res
+      .status(422)
+      .send(
+        "O valor deve ser um número inteiro maior ou igual a zero e não fracionário!"
+      );
+    return;
+  }
+  console.log("descricao: " + descricao);
+  if (
+    descricao === undefined ||
+    descricao === null ||
+    descricao.trim() === ""
+  ) {
+    console.log("descrição faltante");
+    res.status(422).send("Descrição faltante");
+    return;
+  } else if (descricao.length >= 15) {
+    console.log("descrição muito grande");
+    res.status(422).send("Descrição muito grande");
+    return;
+  }
   if (id >= 6) {
+    console.log("cliente inexistente para o id: " + id);
     res.status(404).send("Cliente inexistente!");
     return;
   }
   if (tipo === "c") {
     // implementar controle de limite de saldo
     // crédito de valor em conta
+    console.log("crédito");
     valor = valor;
   } else if (tipo === "d") {
     // débito de valor em conta
+    console.log("débito");
     valor = -valor;
     const query0 = await db.query({
       text: "SELECT limite, saldo FROM clientes WHERE id = $1",
@@ -34,10 +65,12 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     });
     if (query0.rows[0].saldo + valor < -query0.rows[0].limite) {
       // verificar outra forma de fazer
+      console.log("limite insuficiente");
       res.status(422).send("Limite insuficiente!");
       return;
     }
   } else {
+    console.log("operação indefinida (c ou d faltante)");
     res.status(422).send("operação não existente para tipo =  " + tipo);
     return;
   }
@@ -46,7 +79,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [valor, id],
   });
   const query2 = await db.query({
-    text: "INSERT INTO transacoes(valor, cliente_id, tipo, descricao) values($1,$2,$3,$4)",
+    text: "INSERT INTO transacoes(valor, cliente_id, tipo, descricao) values(ABS($1),$2,$3,$4)",
     values: [valor, id, tipo, descricao],
   });
 
@@ -56,6 +89,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [id],
   });
   const resultadoConsulta = parseInt(query3); // verificar necessidade do parse
+  console.log("post comum");
   res.status(200).send(query3.rows[0]);
   return;
 });

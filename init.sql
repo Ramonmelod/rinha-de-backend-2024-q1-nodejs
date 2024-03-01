@@ -11,7 +11,7 @@ CREATE TABLE transacoes(
   cliente_id INT NOT NULL,
   valor INT NOT NULL,
   tipo  CHAR(1) NOT NULL,
-  descricao   VARCHAR(100) NOT NULL,/*verificar necessidade de mudar tamanho do varchar para 10*/
+  descricao   VARCHAR(10) NOT NULL,/*verificar necessidade de mudar tamanho do varchar para 10*/
   realizada_em  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_clientes_transacoes_id
       FOREIGN KEY (cliente_id) REFERENCES clientes(id)
