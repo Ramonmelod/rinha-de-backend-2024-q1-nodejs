@@ -1,24 +1,26 @@
-const { Client } = require("pg");
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  host: "localhost",
+  port: "5432",
+  user: "postgres",
+  database: "postgres",
+  password: "local_password",
+  //max: 80,
+});
 
 const query = async (queryObject) => {
-  // alterar para um pool de conexões
-  const client = new Client({
-    host: "localhost",
-    port: "5432",
-    user: "postgres",
-    database: "postgres",
-    password: "local_password",
-  });
-
-  await client.connect();
+  const client = await pool.connect(); // verificar se let é válido
 
   try {
-    const res = await client.query(queryObject);
+    const res = await client.query(queryObject); //client.query
     return res;
   } catch (error) {
     console.log("Erro no try-catch em: " + error);
   } finally {
-    await client.end();
+    if (client) {
+      client.release();
+    }
   }
 };
 

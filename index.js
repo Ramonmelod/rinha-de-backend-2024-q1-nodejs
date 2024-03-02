@@ -31,17 +31,17 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
       );
     return;
   }
-  console.log("descricao: " + descricao);
+  // console.log("descricao: " + descricao);
   if (
     descricao === undefined ||
     descricao === null ||
     descricao.trim() === ""
   ) {
-    console.log("descrição faltante");
+    //    console.log("descrição faltante");
     res.status(422).send("Descrição faltante");
     return;
   } else if (descricao.length >= 15) {
-    console.log("descrição muito grande");
+    //    console.log("descrição muito grande");
     res.status(422).send("Descrição muito grande");
     return;
   }

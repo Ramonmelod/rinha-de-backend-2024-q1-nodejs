@@ -7,11 +7,12 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8080
-    deploy:
-      resources:
-        limits:
-          cpus: "0.37"
-          memory: "60MB"
+    #    restart: unless-stopped
+  #    deploy:
+  #      resources:
+  #        limits:
+  #          cpus: "0.8" #0.37
+  #          memory: "60MB"
   app02:
     build:
       context: ..
@@ -20,11 +21,12 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8081
-    deploy:
-      resources:
-        limits:
-          cpus: "0.37"
-          memory: "60MB"
+    #    restart: unless-stopped
+  #    deploy:
+  #      resources:
+  #        limits:
+  #          cpus: "0.8" #0.37
+  #          memory: "60MB"
 
   database:
     image: "postgres:16.0-alpine3.18"
@@ -33,11 +35,11 @@ services: #postar imagem
     network_mode: host
     volumes:
       - ../init.sql:/docker-entrypoint-initdb.d/init.sql
-    deploy:
-      resources:
-        limits:
-          cpus: "0.56"
-          memory: "400MB"
+  #    deploy:
+  #      resources:
+  #        limits:
+  #          cpus: "0.56"
+  #          memory: "400MB"
   nginx:
     image: nginx:1.25.4-alpine
     volumes:
@@ -46,10 +48,10 @@ services: #postar imagem
       - app01
       - app02
     network_mode: host
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: "30MB" # 60MB
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.2"
+#          memory: "30MB" # 60MB
 
 #limites de memoria: 550 mb e de cpu: 1.5 cpus
