@@ -8,11 +8,11 @@ services: #postar imagem
     environment:
       HTTP_PORT: 8080
     #    restart: unless-stopped
-  #    deploy:
-  #      resources:
-  #        limits:
-  #          cpus: "0.8" #0.37
-  #          memory: "60MB"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.37"
+          memory: "60MB"
   app02:
     build:
       context: ..
@@ -22,11 +22,11 @@ services: #postar imagem
     environment:
       HTTP_PORT: 8081
     #    restart: unless-stopped
-  #    deploy:
-  #      resources:
-  #        limits:
-  #          cpus: "0.8" #0.37
-  #          memory: "60MB"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.37"
+          memory: "60MB"
 
   database:
     image: "postgres:16.0-alpine3.18"
