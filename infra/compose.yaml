@@ -7,7 +7,7 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8080
-    #    restart: unless-stopped
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -21,7 +21,7 @@ services: #postar imagem
     network_mode: host
     environment:
       HTTP_PORT: 8081
-    #    restart: unless-stopped
+    restart: unless-stopped
     deploy:
       resources:
         limits:

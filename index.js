@@ -9,7 +9,7 @@ const localhost = "0.0.0.0";
 app.use(express.json());
 
 app.use("/clientes", apiRouter); // router que permite captura de parâmetros da URL para o endPoint /clientes
-//--------------------------------post ------------------------------------------------------------
+
 apiRouter.post("/:id/transacoes", async (req, res) => {
   console.log("endpoit post");
   res.type("application/json");
@@ -23,55 +23,42 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     !Number.isInteger(Number(valor)) ||
     Number(valor) < 0
   ) {
-    console.log("valor negativo ou fracionário" + valor);
-    res
-      .status(422)
-      .send(
-        "O valor deve ser um número inteiro maior ou igual a zero e não fracionário!"
-      );
+    res.status(422).send("operação inválida!");
     return;
   }
-  // console.log("descricao: " + descricao);
   if (
     descricao === undefined ||
     descricao === null ||
     descricao.trim() === ""
   ) {
-    //    console.log("descrição faltante");
     res.status(422).send("Descrição faltante");
     return;
   } else if (descricao.length >= 15) {
-    //    console.log("descrição muito grande");
     res.status(422).send("Descrição muito grande");
     return;
   }
   if (id >= 6) {
-    console.log("cliente inexistente para o id: " + id);
     res.status(404).send("Cliente inexistente!");
     return;
   }
   if (tipo === "c") {
-    // implementar controle de limite de saldo
     // crédito de valor em conta
-    console.log("crédito");
     valor = valor;
   } else if (tipo === "d") {
     // débito de valor em conta
-    console.log("débito");
     valor = -valor;
     const query0 = await db.query({
       text: "SELECT limite, saldo FROM clientes WHERE id = $1",
       values: [id],
     });
     if (query0.rows[0].saldo + valor < -query0.rows[0].limite) {
-      // verificar outra forma de fazer
       console.log("limite insuficiente");
       res.status(422).send("Limite insuficiente!");
       return;
     }
   } else {
-    console.log("operação indefinida (c ou d faltante)");
-    res.status(422).send("operação não existente para tipo =  " + tipo);
+    console.log("operação indefinida!");
+    res.status(422).send("operação indefinida!");
     return;
   }
   const query1 = await db.query({
@@ -88,12 +75,10 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     text: "SELECT limite, saldo FROM clientes WHERE id = $1",
     values: [id],
   });
-  console.log("post comum");
   res.status(200).send(query3.rows[0]);
   return;
 });
 
-//--------------------------------get ------------------------------------------------------------
 apiRouter.get("/:id/extrato", async (req, res) => {
   const id = req.params.id;
   if (id >= 6) {
@@ -124,15 +109,9 @@ apiRouter.get("/:id/extrato", async (req, res) => {
     ultimas_transacoes: ultimas_transacoes, //recebe a array ultimas_transacoes
   };
   res.type("application/json");
-  console.log("endpoit get");
   res.status(200).send(objectResponse);
   return;
 });
 app.listen(porta, localhost, () => {
   console.log("servidor rodando!");
 });
-
-/*notas:
-os serviços não devem demorar mais que 40 segundos para subir estar disponiveis
-*/
-/* "SELECT c.limite, c.saldo, t.realizada_em, t.descricao, t.tipo, t.valor FROM clientes c JOIN transacoes t ON c.id = t.cliente_id WHERE c.id = $1 ORDER BY t.realizada_em DESC limit 10"*/

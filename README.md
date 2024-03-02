@@ -20,6 +20,10 @@
 
 - [repositório da api](https://github.com/Ramonmelod/rinha-de-backend-2024-q1-nodejs)
 
+## rinha de backend-2024
+
+- [repositório da rinha de backend-2024](https://github.com/zanfranceschi/rinha-de-backend-2024-q1)
+
 ## Instruções inicialização:
 
 - Com o terminal na pasta do repositório inicie os conteiners com o comando: docker compose -f infra/compose.yaml up -d
@@ -39,11 +43,3 @@
 - app01 => porta: 8080. Esta é uma das instancias da aplicação.
 - app02 => porta: 8081. Esta é uma das instancias da aplicação.
 - postgres => porta: 5432. Este é o banco de dados da aplicação
-
-## instruções para a fase de desenvolvimento
-
-- docker exec -it <idcontainner> <bash/sh>
-- para editar arquivos dentro do container é possível utilzar o vi
-- docker run -d --name api nome_da_imagem
-- docker inspect <nome_do_contêiner> (para encontrar o ip do container)
-- numero de conexões abertas contra o postgres: SELECT count(\*)::int FROM pg_stat_activity where datname = 'postgres';
