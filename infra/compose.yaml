@@ -1,8 +1,6 @@
 services:
-  app01: # image: ramonmelod/rinha-de-backend-2024-q1-nodejs:latest
-    build:
-      context: ..
-      dockerfile: dockerfile
+  app01:
+    image: ramonmelod/rinha-de-backend-2024-q1-nodejs:latest
     hostname: app01
     network_mode: host
     environment:
@@ -21,9 +19,7 @@ services:
           cpus: "0.37"
           memory: "60MB"
   app02:
-    build:
-      context: ..
-      dockerfile: dockerfile
+    image: ramonmelod/rinha-de-backend-2024-q1-nodejs:latest
     hostname: app02
     network_mode: host
     environment:
