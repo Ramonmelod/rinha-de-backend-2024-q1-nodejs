@@ -19,8 +19,8 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
   const { descricao } = req.body;
 
   if (
-    !/^\d+$/.test(valor) ||
-    !Number.isInteger(Number(valor)) ||
+    !/^\d+$/.test(valor) || // a expressão regular testa se valor é formado por números
+    !Number.isInteger(Number(valor)) || // o metodo number transforma valor em um número, caso seja um número em uma string e o método Number.isInterger testa se é o numero inteiro
     Number(valor) < 0
   ) {
     res.status(422).send("operação inválida!");

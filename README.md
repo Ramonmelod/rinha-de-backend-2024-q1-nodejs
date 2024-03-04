@@ -24,6 +24,30 @@
 
 - [repositório da rinha de backend-2024](https://github.com/zanfranceschi/rinha-de-backend-2024-q1)
 
+## Endpoints
+
+### transações
+
+`POST /clientes/[id]/transacoes`
+
+```json
+{
+  "valor": 1000,
+  "tipo": "c",
+  "descricao": "descricao"
+}
+```
+
+## Extrato
+
+**Requisição**
+
+`GET /clientes/[id]/extrato`
+
+Onde
+
+- `[id]` (na URL) deve ser um número inteiro representando a identificação do cliente.
+
 ## Instruções inicialização:
 
 - Com o terminal na pasta do repositório inicie os conteiners com o comando: docker compose -f infra/compose.yaml up -d
