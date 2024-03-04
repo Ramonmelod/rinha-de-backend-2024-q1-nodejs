@@ -1,5 +1,5 @@
-services: #postar imagem
-  app01:
+services:
+  app01: # image: ramonmelod/rinha-de-backend-2024-q1-nodejs:latest
     build:
       context: ..
       dockerfile: dockerfile
