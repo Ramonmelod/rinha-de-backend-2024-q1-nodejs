@@ -66,7 +66,7 @@ apiRouter.post("/:id/transacoes", async (req, res) => {
     values: [valor, id],
   });
   const query2 = await db.query({
-    text: "INSERT INTO transacoes(valor, cliente_id, tipo, descricao) values(ABS($1),$2,$3,$4)",
+    text: "INSERT INTO transacoes(valor, cliente_id, tipo, descricao) values(ABS($1),$2,$3,$4)", // ABS faz com que apenas o modulo da variável valor seja inserido
     values: [valor, id, tipo, descricao],
   });
 
