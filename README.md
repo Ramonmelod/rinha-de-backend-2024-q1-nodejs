@@ -1,6 +1,6 @@
 # Backend Fight 2024 Q1 - Node.js
 
-## Implementação de API em JS-node utilizando Express para a rinha de backend 2024
+## Implementation of a JS-node API using Express for Backend Fight 2024
 
 <div style="display: flex; align-items: center;">
   <img src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="logo express" width="100" height="auto">
