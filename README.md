@@ -22,7 +22,7 @@
 
 ## Backend Fight 2024
 
-- [Backend Fight 2024 Repository(https://github.com/zanfranceschi/rinha-de-backend-2024-q1)
+- [Backend Fight 2024 Repository](https://github.com/zanfranceschi/rinha-de-backend-2024-q1)
 
 ## Endpoints
 
